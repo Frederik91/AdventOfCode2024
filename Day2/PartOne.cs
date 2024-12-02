@@ -4,30 +4,25 @@ namespace Day2;
 
 public static class PartOne
 {
-    public static (int safeCount, int unsafeCount) Run()
+    public static int Run()
     {
         var input = File.ReadLines("input.txt");
 
-        var unsafeCount = 0;
         var safeCount = 0;
         foreach (var line in input)
         {
-            var numbers = line.Split(" ").Select(int.Parse).ToArray();
-            if (IsValid(numbers))
+            if (IsValid(line))
             {
                 safeCount++;
             }
-            else
-            {
-                unsafeCount++;
-            }
         }
 
-        return (safeCount, unsafeCount);
+        return safeCount;
     }
 
-    private static bool IsValid(Span<int> numbers)
+    public static bool IsValid(string line)
     {
+        var numbers = line.Split(" ").Select(int.Parse).ToArray();
         var isIncreasing = numbers[0] < numbers[1];
 
         for (int i = 1; i < numbers.Length; i++)
