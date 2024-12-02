@@ -29,6 +29,11 @@ public static class PartTwo
             return true;
         }
 
+        return EvaluateVariants(numbers, invalidIndexes);
+    }
+
+    private static bool EvaluateVariants(int[] numbers, int[] invalidIndexes)
+    {
         var variants = GetVariants(numbers, invalidIndexes);
         return variants.Any(x => IsValid(x, out _));
     }
