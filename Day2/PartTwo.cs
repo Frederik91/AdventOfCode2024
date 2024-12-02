@@ -40,7 +40,17 @@ public static class PartTwo
 
     private static int[] GetValuesExceptIndex(int[] numbers, int index)
     {
-        return numbers.Take(index).Concat(numbers.Skip(index + 1)).ToArray();
+        var result = new int[numbers.Length - 1];
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            if (i == index)
+            {
+                continue;
+            }
+            var insertIndex = i > index ? i - 1 : i;
+            result[insertIndex] = numbers[i];
+        }
+        return result;
     }
 
     private static bool IsValid(Span<int> numbers, [NotNullWhen(false)] out int[]? invalidIndexes)
@@ -53,31 +63,27 @@ public static class PartTwo
             var prev = numbers[i - 1];
             var current = numbers[i];
 
-            if (IsValid(isIncreasing, prev, current) == false)
-            {
-                if (i > 1)
-                {
-                    invalidIndexes = [i - 2, i - 1, i];
-                }
-                else
-                {
-                    invalidIndexes = [i - 1, i];
-                }
+            if (IsValid(isIncreasing, prev, current))
+                continue;
 
-                return false;
+            if (i > 1)
+            {
+                invalidIndexes = [i - 2, i - 1, i];
             }
+            else
+            {
+                invalidIndexes = [i - 1, i];
+            }
+
+            return false;
         }
+
         return true;
     }
 
     private static bool IsValid(bool isIncreasing, int prev, int current)
     {
-        if (isIncreasing == false && current >= prev)
-        {
-            return false;
-        }
-
-        if (isIncreasing && current <= prev)
+        if (IsChangingDirection(isIncreasing, prev, current))
         {
             return false;
         }
@@ -90,14 +96,23 @@ public static class PartTwo
         return true;
     }
 
-    private static bool IsTooFarApart(int prev, int current)
+    private static bool IsChangingDirection(bool isIncreasing, int prev, int current)
     {
-        var distFromPrev = Math.Abs(current - prev);
-        if (distFromPrev > 3)
+        if (isIncreasing == false && current >= prev)
+        {
+            return true;
+        }
+
+        if (isIncreasing && current <= prev)
         {
             return true;
         }
 
         return false;
+    }
+
+    private static bool IsTooFarApart(int prev, int current)
+    {
+        return Math.Abs(current - prev) > 3;
     }
 }
