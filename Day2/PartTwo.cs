@@ -66,19 +66,27 @@ public static class PartTwo
             if (IsValid(isIncreasing, prev, current))
                 continue;
 
-            if (i > 1)
-            {
-                invalidIndexes = [i - 2, i - 1, i];
-            }
-            else
-            {
-                invalidIndexes = [i - 1, i];
-            }
+            invalidIndexes = CalculateInvalidIndexes(i);
 
             return false;
         }
 
         return true;
+    }
+
+    private static int[] CalculateInvalidIndexes(int i)
+    {
+        int[]? invalidIndexes;
+        if (i > 1)
+        {
+            invalidIndexes = [i - 2, i - 1, i];
+        }
+        else
+        {
+            invalidIndexes = [i - 1, i];
+        }
+
+        return invalidIndexes;
     }
 
     private static bool IsValid(bool isIncreasing, int prev, int current)
