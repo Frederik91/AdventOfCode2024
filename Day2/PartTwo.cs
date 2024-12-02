@@ -29,13 +29,13 @@ public static class PartTwo
             return true;
         }
 
-        var variants = invalidIndexes.Select(x => GetValuesExceptIndex(numbers, x)).ToArray();
-        if (variants.Any(x => IsValid(x, out _)))
-        {
-            return true;
-        }
+        var variants = GetVariants(numbers, invalidIndexes);
+        return variants.Any(x => IsValid(x, out _));
+    }
 
-        return false;
+    private static int[][] GetVariants(int[] numbers, int[] invalidIndexes)
+    {
+        return invalidIndexes.Select(x => GetValuesExceptIndex(numbers, x)).ToArray();
     }
 
     private static int[] GetValuesExceptIndex(int[] numbers, int index)
