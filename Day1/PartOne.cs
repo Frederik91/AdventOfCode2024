@@ -4,7 +4,7 @@ namespace Day1;
 
 public static class PartOne
 {
-    public static void Run()
+    public static int Run()
     {
         var input = File.ReadLines("input.txt");
         var row1Numbers = new List<int>();
@@ -26,7 +26,7 @@ public static class PartOne
             totalDistance += distance;
         }
 
-        Console.WriteLine(totalDistance);
+        return totalDistance;
 
         static void AddSorted(List<int> numbers, int number)
         {

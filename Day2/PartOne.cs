@@ -1,10 +1,10 @@
 using System;
 
-namespace Day1;
+namespace Day2;
 
 public static class PartOne
 {
-    public static void Run()
+    public static (int safeCount, int unsafeCount) Run()
     {
         var input = File.ReadLines("input.txt");
 
@@ -21,11 +21,9 @@ public static class PartOne
             {
                 unsafeCount++;
             }
-
         }
 
-        Console.WriteLine("Safe: " + safeCount);
-        Console.WriteLine("Unsafe: " + unsafeCount);
+        return (safeCount, unsafeCount);
     }
 
     private static bool IsValid(Span<int> numbers)

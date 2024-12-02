@@ -4,7 +4,7 @@ namespace Day1;
 
 public static class PartTwo
 {
-    public static void Run()
+    public static int Run()
     {
         var input = File.ReadLines("input.txt");
         var row1Numbers = new List<int>();
@@ -36,6 +36,6 @@ public static class PartTwo
             }
         }
 
-        Console.WriteLine(sum);
+        return sum;
     }
 }
