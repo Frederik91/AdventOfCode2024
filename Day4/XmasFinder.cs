@@ -83,17 +83,17 @@ public static class XmasFinder
             var diagonal = new List<char>();
             for (var row = 0; row < matrix.Length; row++)
             {
-            var columnIndex = column - row;
-            if (columnIndex < 0)
-            {
-                break;
-            }
-            var character = matrix[row][columnIndex];
-            diagonal.Add(character);
+                var columnIndex = column - row;
+                if (columnIndex < 0)
+                {
+                    break;
+                }
+                var character = matrix[row][columnIndex];
+                diagonal.Add(character);
             }
 
             if (diagonal.Count > 3)
-            diagonals.Add(diagonal.ToArray());
+                diagonals.Add([.. diagonal]);
         }
 
         for (var row = 1; row < matrix.Length; row++)
@@ -101,17 +101,17 @@ public static class XmasFinder
             var diagonal = new List<char>();
             for (var column = matrix[0].Length - 1; column >= 0; column--)
             {
-            var rowIndex = row + (matrix[0].Length - 1 - column);
-            if (rowIndex >= matrix.Length)
-            {
-                break;
-            }
-            var character = matrix[rowIndex][column];
-            diagonal.Add(character);
+                var rowIndex = row + matrix[0].Length - 1 - column;
+                if (rowIndex >= matrix.Length)
+                {
+                    break;
+                }
+                var character = matrix[rowIndex][column];
+                diagonal.Add(character);
             }
 
             if (diagonal.Count > 3)
-            diagonals.Add(diagonal.ToArray());
+                diagonals.Add([.. diagonal]);
         }
 
         return diagonals;
@@ -152,13 +152,11 @@ public static class XmasFinder
         {
             if (IsXmasForward(row, i))
             {
-                count++;
-                i += 3;
+                count++;                
             }
             else if (IsXmasBackward(row, i))
             {
                 count++;
-                i += 3;
             }
         }
 

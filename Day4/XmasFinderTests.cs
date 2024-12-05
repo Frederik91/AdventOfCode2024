@@ -11,13 +11,13 @@ public class XmasFinderTest
         var input = File.ReadAllText("input.txt");
         var result = XmasFinder.Count(input);
 
-        Assert.True(result > 1614);
+        Assert.Equal(2554, result);
     }
 
     [Fact]
     public void Example()
     {
-        var input =
+         var input =
 """
 MMMSXXMASM
 MSAMXMSMSA
@@ -29,7 +29,7 @@ SMSMSASXSS
 SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX
-""";
+"""; 
 
         var result = XmasFinder.Count(input);
 
@@ -145,6 +145,23 @@ MXMXAXMASX
             ['0', '0', '0', '0', '0'],
             ['0', '0', 'O', '0', '0'],
             ['0', 'S', 'A', 'M', 'X'],
+        ];
+
+        var result = XmasFinder.CountXMasesInMatrix(matrix);
+
+        Assert.Equal(2, result);
+    }
+
+        [Fact]
+    public void CountXMassesInMatrix_ShouldReturnOne_Vertical()
+    {
+        char[][] matrix =
+        [
+            ['0', '0', '0', '0', 'X'],
+            ['X', 'M', 'A', 'S', 'M'],
+            ['0', '0', '0', '0', 'A'],
+            ['0', '0', 'O', '0', 'S'],
+            ['0', '0', '0', '0', '0'],
         ];
 
         var result = XmasFinder.CountXMasesInMatrix(matrix);
