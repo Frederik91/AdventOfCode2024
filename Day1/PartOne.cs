@@ -6,11 +6,17 @@ public static class PartOne
 {
     public static int Run()
     {
-        var input = File.ReadLines("input.txt");
+        var input = File.ReadAllText("input.txt");
+        return Calculate(input);
+    }
+
+    public static int Calculate(string input)
+    {
         var row1Numbers = new List<int>();
         var row2Numbers = new List<int>();
 
-        foreach (var line in input)
+        
+        foreach (var line in input.Replace("\r", "").Split(Environment.NewLine))
         {
             var numbers = line.Split("   ");
             AddSorted(row1Numbers, int.Parse(numbers[0]));

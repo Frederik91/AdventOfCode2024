@@ -93,7 +93,7 @@ public class Parser
 {
 
 
-    internal static List<int> Parse(string input, bool includeDisable = false)
+    public static List<int> Parse(string input, bool includeDisable = false)
     {
         var sequences = new List<ISequence>
         {
@@ -153,7 +153,7 @@ public class Parser
 
     }
 
-    public static bool IsEnableFlag(ReadOnlySpan<char> span)
+    internal static bool IsEnableFlag(ReadOnlySpan<char> span)
     {
         if (span.Length < 4)
         {
@@ -165,7 +165,7 @@ public class Parser
             && span[3] == ')';
     }
 
-    public static bool IsDisableFlag(ReadOnlySpan<char> span)
+    internal static bool IsDisableFlag(ReadOnlySpan<char> span)
     {
         if (span.Length < 7)
         {

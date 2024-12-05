@@ -7,11 +7,16 @@ public static class PartTwo
 {
     public static int Run()
     {
-        var input = File.ReadLines("input.txt");
+        var input = File.ReadAllText("input.txt");
 
+        return CountSafeLines(input);
+    }
+
+    public static int CountSafeLines(string input)
+    {
         var unsafeCount = 0;
         var safeCount = 0;
-        foreach (var line in input)
+        foreach (var line in input.Replace("\r", "").Split(Environment.NewLine))
         {
             var isValid = IsLineValid(line);
             safeCount += isValid ? 1 : 0;

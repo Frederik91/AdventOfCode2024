@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace Day4.Tests;
+namespace Day4;
 
 public class XmasFinderTest
 {

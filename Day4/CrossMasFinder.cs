@@ -4,7 +4,7 @@ namespace Day4;
 
 public class CrossMasFinder
 {
-    internal static int Count(string input)
+    public static int Count(string input)
     {
         var matrix = MatrixBuilder.Build(input.AsSpan());
         int masCount = CountMas(matrix);

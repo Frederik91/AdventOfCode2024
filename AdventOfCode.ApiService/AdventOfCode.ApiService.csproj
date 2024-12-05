@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Day1/Day1.csproj" />
+    <ProjectReference Include="../Day2/Day2.csproj" />
+    <ProjectReference Include="../Day3/Day3.csproj" />
+    <ProjectReference Include="../Day4/Day4.csproj" />
+    <ProjectReference Include="../Day5/Day5.csproj" />
+  </ItemGroup>
+
+</Project>

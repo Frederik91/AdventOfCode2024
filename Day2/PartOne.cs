@@ -6,10 +6,14 @@ public static class PartOne
 {
     public static int Run()
     {
-        var input = File.ReadLines("input.txt");
+        var input = File.ReadAllText("input.txt");
+        return CountSafeLines(input);
+    }
 
+    public static int CountSafeLines(string input)
+    {
         var safeCount = 0;
-        foreach (var line in input)
+        foreach (var line in input.Replace("\r", "").Split(Environment.NewLine))
         {
             if (IsValid(line))
             {

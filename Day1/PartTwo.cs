@@ -6,11 +6,16 @@ public static class PartTwo
 {
     public static int Run()
     {
-        var input = File.ReadLines("input.txt");
+        var input = File.ReadAllText("input.txt");
+        return Calculate(input);
+    }
+
+    public static int Calculate(string input)
+    {
         var row1Numbers = new List<int>();
         var row2Numbers = new Dictionary<int, int>();
 
-        foreach (var line in input)
+        foreach (var line in input.Replace("\r", "").Split(Environment.NewLine))
         {
             var numbers = line.Split("   ");
             var num1 = int.Parse(numbers[0]);

@@ -1,0 +1,11 @@
+@AdventOfCode.ApiService_HostAddress = http://localhost:5253
+
+POST  {{AdventOfCode.ApiService_HostAddress}}/day/1/part/1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "input": "82728   61150\n39850   94024\n24609   43406"
+}
+
+###
