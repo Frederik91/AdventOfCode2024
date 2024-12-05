@@ -59,23 +59,59 @@ public static class XmasFinder
                 diagonals.Add([.. diagonal]);
         }
 
+        for (var row = 1; row < matrix.Length; row++)
+        {
+            var diagonal = new List<char>();
+            for (var column = 0; column < matrix[0].Length; column++)
+            {
+                var rowIndex = row + column;
+                if (rowIndex >= matrix.Length)
+                {
+                    break;
+                }
+                var character = matrix[rowIndex][column];
+                diagonal.Add(character);
+            }
+
+            if (diagonal.Count > 3)
+                diagonals.Add([.. diagonal]);
+        }
+
         // Scan right to left diagonals
         for (var column = matrix[0].Length - 1; column >= 0; column--)
         {
             var diagonal = new List<char>();
             for (var row = 0; row < matrix.Length; row++)
             {
-                var columnIndex = column - row;
-                if (columnIndex < 0)
-                {
-                    break;
-                }
-                var character = matrix[row][columnIndex];
-                diagonal.Add(character);
+            var columnIndex = column - row;
+            if (columnIndex < 0)
+            {
+                break;
+            }
+            var character = matrix[row][columnIndex];
+            diagonal.Add(character);
             }
 
             if (diagonal.Count > 3)
-                diagonals.Add([.. diagonal]);
+            diagonals.Add(diagonal.ToArray());
+        }
+
+        for (var row = 1; row < matrix.Length; row++)
+        {
+            var diagonal = new List<char>();
+            for (var column = matrix[0].Length - 1; column >= 0; column--)
+            {
+            var rowIndex = row + (matrix[0].Length - 1 - column);
+            if (rowIndex >= matrix.Length)
+            {
+                break;
+            }
+            var character = matrix[rowIndex][column];
+            diagonal.Add(character);
+            }
+
+            if (diagonal.Count > 3)
+            diagonals.Add(diagonal.ToArray());
         }
 
         return diagonals;

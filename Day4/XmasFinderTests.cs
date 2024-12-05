@@ -17,7 +17,7 @@ public class XmasFinderTest
     [Fact]
     public void Example()
     {
-        var input = 
+        var input =
 """
 MMMSXXMASM
 MSAMXMSMSA
@@ -179,10 +179,15 @@ MXMXAXMASX
             ['I', 'M', 'A', 'L', 'X'],
             ['X', 'M', 'O', 'P', 'X'],
             ['X', 'S', 'O', 'P', 'X'],
+            ['X', 'S', 'O', 'P', 'X'],
+            ['X', 'S', 'O', 'S', 'X'],
+            ['X', 'S', 'A', 'P', 'X'],
+            ['X', 'M', 'O', 'P', 'X'],
+            ['X', 'S', 'O', 'P', 'X'],
         ];
 
         var result = XmasFinder.CountXMasesInMatrix(matrix);
 
-        Assert.Equal(2, result);
+        Assert.Equal(3, result);
     }
 }
