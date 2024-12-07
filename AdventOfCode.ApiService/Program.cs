@@ -28,9 +28,9 @@ app.MapPost("day/{day}/part/{part}", (int day, int part, [FromBody] PuzzleInput 
 .Produces<int>()
 .WithDescription("Calculates the result for the given day and part.");
 
-static IResult Calculate<T>(int part, string input) where T : IDaySolver
+static IResult Calculate<T>(int part, string input) where T : IDaySolver, new()
 {
-    var solver = Activator.CreateInstance<T>();
+    var solver = new T();
     return part switch
     {
         1 => Results.Ok(solver.CalculatePartOne(input)),
