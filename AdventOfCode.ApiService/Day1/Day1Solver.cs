@@ -53,6 +53,10 @@ public class Day1Solver : IDaySolver
             row1Numbers.Add(num1);
 
             var num2 = int.Parse(numbers[1]);
+            if (!row2Numbers.TryGetValue(num2, out _))
+            {
+                row2Numbers[num2] = 0;
+            }
             row2Numbers[num2] += 1;
         }
 

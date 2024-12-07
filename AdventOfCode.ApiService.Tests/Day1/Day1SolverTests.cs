@@ -18,6 +18,6 @@ public class Day1SolverTests
     {
         var input = File.ReadAllText("Day1/input.txt");
         var safeCount = new Day1Solver().CalculatePartTwo(input);
-        Assert.Equal(42140160, safeCount);
+        Assert.Equal(24931009, safeCount);
     }
 }
