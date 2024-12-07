@@ -7,6 +7,7 @@ using AdventOfCode.ApiService.Day2;
 using AdventOfCode.ApiService.Day3;
 using AdventOfCode.ApiService.Day4;
 using AdventOfCode.ApiService.Day5;
+using AdventOfCode.ApiService.Day6;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,7 @@ app.MapPost("day/{day}/part/{part}", async (int day, int part, HttpRequest reque
         3 => Calculate<Day3Solver>(part, input),
         4 => Calculate<Day4Solver>(part, input),
         5 => Calculate<Day5Solver>(part, input),
+        6 => Calculate<Day6Solver>(part, input),
         > 24 => Results.BadRequest("Day must be between 1 and 24"),
         _ => Results.BadRequest("Day not solved yet")
     };
