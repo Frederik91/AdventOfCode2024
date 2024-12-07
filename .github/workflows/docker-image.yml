@@ -25,7 +25,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6.10.0
       with:
-        context: .
+        context: AdventOfCode.ApiService
         push: true
-        file: AdventOfCode.ApiService/Dockerfile
+        file: Dockerfile
         tags: ${{ secrets.DOCKER_USERNAME }}/adventofcode:2024
