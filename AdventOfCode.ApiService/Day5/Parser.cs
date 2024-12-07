@@ -1,6 +1,6 @@
 using System;
 
-namespace Day5;
+namespace AdventOfCode.ApiService.Day5;
 
 public record Rule(int PageNumber, int DependentPageNumber)
 {

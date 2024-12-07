@@ -17,7 +17,6 @@
 
 
   <ItemGroup>
-    <None Update="input.txt" CopyToOutputDirectory="PreserveNewest" />
     <Using Include="Xunit" />
   </ItemGroup>
 

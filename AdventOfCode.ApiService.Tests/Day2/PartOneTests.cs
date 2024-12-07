@@ -1,17 +1,10 @@
-
+using AdventOfCode.ApiService.Day2;
 using Xunit;
 
-namespace Day2.Tests;
+namespace AdventOfCode.ApiService.Tests.Day2;
 
 public class PartOneTests
 {
-    [Fact]
-    public void TestRun()
-    {
-        var safeCount = PartOne.Run();
-        Assert.Equal(670, safeCount);
-    }
-
     [Theory]
     [InlineData("69 70 71 72 75")]
     [InlineData("68 69 70 71 72")]

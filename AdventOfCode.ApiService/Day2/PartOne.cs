@@ -1,6 +1,6 @@
 using System;
 
-namespace Day2;
+namespace AdventOfCode.ApiService.Day2;
 
 public static class PartOne
 {

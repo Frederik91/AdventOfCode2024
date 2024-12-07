@@ -1,23 +1,15 @@
 using System;
+using AdventOfCode.ApiService.Day4;
 using Xunit;
 
-namespace Day4;
+namespace AdventOfCode.ApiService.Tests.Day4;
 
 public class XmasFinderTest
 {
     [Fact]
-    public void PartOne()
-    {
-        var input = File.ReadAllText("input.txt");
-        var result = XmasFinder.Count(input);
-
-        Assert.Equal(2554, result);
-    }
-
-    [Fact]
     public void Example()
     {
-         var input =
+        var input =
 """
 MMMSXXMASM
 MSAMXMSMSA
@@ -29,7 +21,7 @@ SMSMSASXSS
 SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX
-"""; 
+""";
 
         var result = XmasFinder.Count(input);
 
@@ -152,7 +144,7 @@ MXMXAXMASX
         Assert.Equal(2, result);
     }
 
-        [Fact]
+    [Fact]
     public void CountXMassesInMatrix_ShouldReturnOne_Vertical()
     {
         char[][] matrix =

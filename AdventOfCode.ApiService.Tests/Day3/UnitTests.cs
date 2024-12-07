@@ -1,28 +1,11 @@
-﻿using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using AdventOfCode.ApiService.Day3;
+using AdventOfCode.ApiService.Day3.Sequences;
 
-namespace Day3;
+namespace AdventOfCode.ApiService.Tests.Day3;
 
 public class UnitTests
 {
-    [Fact]
-    public void RealData_Part1()
-    {
-        var input = File.ReadAllText("input.txt");
-        var result = Parser.Parse(input);
-        var sum = result.Sum();
-        Assert.Equal(173785482, sum);
-    }
-
-    [Fact]
-    public void RealData_Part2()
-    {
-        var input = File.ReadAllText("input.txt");
-        var result = Parser.Parse(input, includeDisable: true);
-        var sum = result.Sum();
-        Assert.Equal(83158140, sum);
-    }
-
     [Theory]
     [InlineData("mul(4,2)", 8)]
     [InlineData("mul(42,2)", 84)]
@@ -78,51 +61,6 @@ public class UnitTests
     public void IsDisableFlag(string input, bool expected)
     {
         var actual = Parser.IsDisableFlag(input.AsSpan());
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void IsDisableFlag_CorrectCount()
-    {
-        var input = File.ReadAllText("input.txt");
-        var actual = 0;
-        var span = input.AsSpan();
-        while (span.Length > 0)
-        {
-            var isDisableFlag = Parser.IsDisableFlag(span);
-            if (isDisableFlag)
-            {
-
-                actual++;
-            }
-            span = span[1..];
-        }
-
-        var expected = Regex.Matches(input, @"don\'t()").Count;
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void IsEnableFlag_CorrectCount()
-    {
-        var input = File.ReadAllText("input.txt");
-        var actual = 0;
-        var span = input.AsSpan();
-        while (span.Length > 0)
-        {
-            var isDisableFlag = Parser.IsEnableFlag(span);
-            if (isDisableFlag)
-            {
-
-                actual++;
-            }
-            span = span[1..];
-        }
-
-        var matches = Regex.Matches(input, @"do\(\)");
-        var expected = matches.Count;
-
         Assert.Equal(expected, actual);
     }
 }

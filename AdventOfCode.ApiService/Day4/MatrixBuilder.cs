@@ -1,10 +1,10 @@
 using System;
 
-namespace Day4;
+namespace AdventOfCode.ApiService.Day4;
 
 public class MatrixBuilder
 {
-    internal static char[][] Build(ReadOnlySpan<char> input)
+    public static char[][] Build(ReadOnlySpan<char> input)
     {
         int columns = CalculateColumns(input);
         int rows = CalculateRows(input);

@@ -1,18 +1,9 @@
-using System;
+using AdventOfCode.ApiService.Day4;
 
-namespace Day4;
+namespace AdventOfCode.ApiService.Tests.Day4;
 
 public class CrossMasFinderTests
 {
-    [Fact]
-    public void PartTwo()
-    {
-        var input = File.ReadAllText("input.txt");
-        var result = CrossMasFinder.Count(input);
-
-        Assert.Equal(1916, result);
-    }
-
     [Fact]
     public void Example()
     {

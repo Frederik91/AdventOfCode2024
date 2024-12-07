@@ -1,6 +1,6 @@
 using System;
 
-namespace Day4;
+namespace AdventOfCode.ApiService.Day4;
 
 public class CrossMasFinder
 {
@@ -50,12 +50,12 @@ public class CrossMasFinder
 
     private static bool IsMas(char topLeft, char character, char bottomRight)
     {
-        if ( topLeft == 'M' && character == 'A' && bottomRight == 'S')
+        if (topLeft == 'M' && character == 'A' && bottomRight == 'S')
         {
             return true;
         }
 
-        if ( topLeft == 'S' && character == 'A' && bottomRight == 'M')
+        if (topLeft == 'S' && character == 'A' && bottomRight == 'M')
         {
             return true;
         }

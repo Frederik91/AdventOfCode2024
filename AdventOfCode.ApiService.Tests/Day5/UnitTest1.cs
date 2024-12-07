@@ -1,4 +1,6 @@
-﻿namespace Day5;
+﻿using AdventOfCode.ApiService.Day5;
+
+namespace AdventOfCode.ApiService.Tests.Day5;
 
 public class UnitTest1
 {
@@ -38,25 +40,5 @@ public class UnitTest1
         var result = sorter.SortPages(parsed.PageOrders[0].PageNumbers);
 
         Assert.Equal(parsed.PageOrders[0].PageNumbers, result);
-    }
-
-    [Fact]
-    public void PartOne()
-    {
-        var input = File.ReadAllText("input.txt");
-
-        var result = PageCalculator.CalculatePartOne(input);
-
-        Assert.Equal(5955, result);
-    }
-
-    [Fact]
-    public void PartTwo()
-    {
-        var input = File.ReadAllText("input.txt");
-
-        var result = PageCalculator.CalculatePartTwo(input);
-
-        Assert.Equal(4030, result);
     }
 }

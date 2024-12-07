@@ -1,7 +1,8 @@
 using System;
+using AdventOfCode.ApiService.Day4;
 using Xunit;
 
-namespace Day4;
+namespace AdventOfCode.ApiService.Tests.Day4;
 
 public class MatrixBuilderTest
 {

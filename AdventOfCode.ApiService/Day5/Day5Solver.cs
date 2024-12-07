@@ -1,10 +1,8 @@
-using System;
+namespace AdventOfCode.ApiService.Day5;
 
-namespace Day5;
-
-public class PageCalculator
+public class Day5Solver : IDaySolver
 {
-    public static int CalculatePartOne(string input)
+    public int CalculatePartOne(string input)
     {
         var parsed = Parser.Parse(input);
         var sorter = new PageSorter(parsed.Rules);
@@ -25,7 +23,7 @@ public class PageCalculator
         return result;
     }
 
-    public static int CalculatePartTwo(string input)
+    public int CalculatePartTwo(string input)
     {
         var parsed = Parser.Parse(input);
         var sorter = new PageSorter(parsed.Rules);

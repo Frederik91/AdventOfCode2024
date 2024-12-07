@@ -1,17 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Day2;
+namespace AdventOfCode.ApiService.Day2;
 
 public static class PartTwo
 {
-    public static int Run()
-    {
-        var input = File.ReadAllText("input.txt");
-
-        return CountSafeLines(input);
-    }
-
     public static int CountSafeLines(string input)
     {
         var unsafeCount = 0;

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Day5;
+namespace AdventOfCode.ApiService.Day5;
 
 public class PageSorter(Rule[] rules)
 {
@@ -21,7 +21,7 @@ public class PageSorter(Rule[] rules)
     {
         var dependentPages = new List<int>();
         AddDependentPages(dependentPages, page);
-        
+
         var index = allPages.Length - 1;
         foreach (var otherPage in allPages.Where(x => x != page))
         {

@@ -1,98 +1,9 @@
-using System;
+using AdventOfCode.ApiService.Day3.Sequences;
 
-namespace Day3;
+namespace AdventOfCode.ApiService.Day3;
 
-public interface ISequence
+public static class Parser
 {
-    bool IsValid(ReadOnlySpan<char> input, out int skipLength);
-}
-
-public class StartSequence : ISequence
-{
-    public bool IsValid(ReadOnlySpan<char> input, out int skipLength)
-    {
-        skipLength = 1;
-        if (input[0] != 'm')
-        {
-            return false;
-        }
-
-        if (input[1] != 'u')
-        {
-            return false;
-        }
-        skipLength++;
-
-        if (input[2] != 'l')
-        {
-            return false;
-        }
-        skipLength++;
-
-        if (input[3] != '(')
-        {
-            return false;
-        }
-        skipLength++;
-        return true;
-    }
-}
-
-public class NumberSequence : ISequence
-{
-    public int Number { get; private set; }
-
-    public bool IsValid(ReadOnlySpan<char> input, out int skipLength)
-    {
-        var digitCount = 0;
-        while (char.IsDigit(input[digitCount]))
-        {
-            digitCount++;
-        }
-
-        skipLength = digitCount;
-        if (digitCount > 0 && digitCount <= 3)
-        {
-            Number = int.Parse(input[..digitCount]);
-            return true;
-        }
-        Number = 0;
-        return false;
-    }
-}
-
-public class CommaSequence : ISequence
-{
-    public bool IsValid(ReadOnlySpan<char> input, out int skipLength)
-    {
-        skipLength = 0;
-        if (input[0] != ',')
-        {
-            return false;
-        }
-        skipLength++;
-        return true;
-    }
-}
-
-public class EndSequence : ISequence
-{
-    public bool IsValid(ReadOnlySpan<char> input, out int skipLength)
-    {
-        if (input[0] != ')')
-        {
-            skipLength = 0;
-            return false;
-        }
-        skipLength = 1;
-        return true;
-    }
-}
-
-public class Parser
-{
-
-
     public static List<int> Parse(string input, bool includeDisable = false)
     {
         var sequences = new List<ISequence>
@@ -153,7 +64,7 @@ public class Parser
 
     }
 
-    internal static bool IsEnableFlag(ReadOnlySpan<char> span)
+    public static bool IsEnableFlag(ReadOnlySpan<char> span)
     {
         if (span.Length < 4)
         {
@@ -165,7 +76,7 @@ public class Parser
             && span[3] == ')';
     }
 
-    internal static bool IsDisableFlag(ReadOnlySpan<char> span)
+    public static bool IsDisableFlag(ReadOnlySpan<char> span)
     {
         if (span.Length < 7)
         {

@@ -1,7 +1,4 @@
-using System;
-using System.Runtime.InteropServices.Marshalling;
-
-namespace Day4;
+namespace AdventOfCode.ApiService.Day4;
 
 public static class XmasFinder
 {
@@ -15,7 +12,7 @@ public static class XmasFinder
         return count;
     }
 
-    internal static int CountXMasesInMatrix(char[][] matrix)
+    public static int CountXMasesInMatrix(char[][] matrix)
     {
         var rowCounts = CountXMasesInRows(matrix);
         var columnCounts = CountXMasesInColumns(matrix);
@@ -36,7 +33,7 @@ public static class XmasFinder
         return count;
     }
 
-    internal static List<char[]> CreateDiagonals(char[][] matrix)
+    public static List<char[]> CreateDiagonals(char[][] matrix)
     {
         var diagonals = new List<char[]>();
 
@@ -145,14 +142,14 @@ public static class XmasFinder
         return count;
     }
 
-    internal static int CountXMasesInArray(char[] row)
+    public static int CountXMasesInArray(char[] row)
     {
         var count = 0;
         for (var i = 0; i < row.Length; i++)
         {
             if (IsXmasForward(row, i))
             {
-                count++;                
+                count++;
             }
             else if (IsXmasBackward(row, i))
             {
