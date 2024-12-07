@@ -27,4 +27,5 @@ jobs:
       with:
         context: AdventOfCode.ApiService
         push: true
+        file: AdventOfCode.ApiService/Dockerfile
         tags: ${{ secrets.DOCKER_USERNAME }}/adventofcode:2024
