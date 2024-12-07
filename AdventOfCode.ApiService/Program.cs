@@ -25,14 +25,10 @@ app.MapPost("day/{day}/part/{part}", async (int day, int part, HttpRequest reque
 {
     if (!request.HasFormContentType || !request.Form.Files.Any(f => f.Name == "puzzle-data"))
     {
-        return Results.BadRequest("Missing puzzle-data file.");
-    }
-
-    var file = request.Form.Files["puzzle-data"];
-    if (file is null)
-    {
         return Results.BadRequest("Missing puzzle-data file. Use Multiform/form-data with a file 'puzzle-data' as form-data key.");
     }
+
+    var file = request.Form.Files["puzzle-data"]!;
     using var reader = new StreamReader(file.OpenReadStream());
     var input = await reader.ReadToEndAsync();
 
