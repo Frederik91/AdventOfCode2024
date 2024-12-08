@@ -6,19 +6,30 @@ public class Simulation(Map map, Guard guard)
 {
     public void Run()
     {
-        while (!map.IsGuardOutOfBounds(guard))
+        while (true)
         {
-            MoveToNextObstacle();
-            guard.TurnRight();
+            try
+            {
+                MoveToNextObstacle();
+                if (map.IsOutOfBounds(guard.Location))
+                {
+                    break;
+                }
+
+                guard.TurnRight();
+            }
+            catch (OutOfMapException)
+            {
+                break;
+            }
         }
     }
 
     private void MoveToNextObstacle()
     {
-
         while (map.MoveGuardForward(guard))
         {
-            if (map.IsGuardOutOfBounds(guard))
+            if (map.IsOutOfBounds(guard.Location))
             {
                 break;
             }

@@ -9,6 +9,8 @@ public class Point2d(int x, int y)
 
     public Point2d Clone() => new(X, Y);
 
+    public override string ToString() => $"({X}, {Y})";
+
     public override bool Equals(object? obj)
     {
         if (obj is not Point2d point)

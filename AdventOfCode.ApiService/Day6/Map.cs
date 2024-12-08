@@ -9,13 +9,12 @@ public class Map(int width, int height, int[][] obstacles, Point2d intialPositio
     public Point2d IntialPosition { get; } = intialPosition;
 
     public int[][] Obstacles { get; } = obstacles;
-
-    internal bool IsGuardOutOfBounds(Guard guard)
+    public bool IsOutOfBounds(Point2d point)
     {
-        return guard.Position.X < 0 || guard.Position.X >= Width || guard.Position.Y < 0 || guard.Position.Y >= Height;
+        return point.X < 0 || point.X >= Width || point.Y < 0 || point.Y >= Height;
     }
 
-    internal bool MoveGuardForward(Guard guard)
+    public bool MoveGuardForward(Guard guard)
     {
         var nextPosition = guard.GetLocationAhead();
         if (IsObstacle(nextPosition))
@@ -27,8 +26,12 @@ public class Map(int width, int height, int[][] obstacles, Point2d intialPositio
         return true;
     }
 
-    private bool IsObstacle(Point2d nextPosition)
+    public bool IsObstacle(Point2d nextPosition)
     {
-        return Obstacles[nextPosition.X][nextPosition.Y] == 1;        
+        if (IsOutOfBounds(nextPosition))
+        {
+            throw new OutOfMapException();
+        }
+        return Obstacles[nextPosition.Y][nextPosition.X] == 1;        
     }
 }
