@@ -23,36 +23,31 @@ public class Day6Solver : IDaySolver
         var map = MapParser.Parse(input);
 
         var loopLocationCount = 0;
-        for (var row = 0; row < map.Height; row++)
+
+        var dryRun = new Simulation(map, new Guard(map.IntialPosition, Vector2d.Up));
+        dryRun.Run();
+
+        var attemptedlocations = new HashSet<Point2d>();
+        foreach (var position in dryRun.Guard.Path.Skip(1))
         {
-            for (var col = 0; col < map.Width; col++)
+            if (!attemptedlocations.Add(position.Point))
             {
-                if (map.Obstacles[row][col] == 1)
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                if (map.IntialPosition.X == col && map.IntialPosition.Y == row)
-                {
-                    continue;
-                }
-
-                try
-                {
-                    map.Obstacles[row][col] = 1;
-                    var guard = new Guard(map.IntialPosition, Vector2d.Up);
-
-                    var simulation = new Simulation(map, guard);
-                    simulation.Run();
-                }
-                catch (InfiniteLoopException)
-                {
-                    loopLocationCount++;
-                }
-                finally
-                {
-                    map.Obstacles[row][col] = 0;
-                }
+            map.Obstacles[position.Point.Y][position.Point.X] = 1;
+            try
+            {
+                var simulation = new Simulation(map, new Guard(map.IntialPosition, Vector2d.Up));
+                simulation.Run();
+            }
+            catch (InfiniteLoopException)
+            {
+                loopLocationCount++;
+            }
+            finally
+            {
+                map.Obstacles[position.Point.Y][position.Point.X] = 0;
             }
         }
 

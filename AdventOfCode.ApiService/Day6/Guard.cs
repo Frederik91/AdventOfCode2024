@@ -7,11 +7,12 @@ public class Guard
     public Point2d Location { get; set; }
 
     public Vector2d Direction { get; set; }
-    public List<Position> Path { get; set; } = [];
+    public HashSet<Position> Path { get; set; } = [];
+    public bool InLoop { get; set; } = false;
 
     public Guard(Point2d position, Vector2d direction)
     {
-        Location = position;
+        Location = position.Clone();
         Direction = direction;
         StorePosition();
     }
@@ -23,6 +24,7 @@ public class Guard
         if (HasBeenHereBefore(p))
         {
             Path.Add(p);
+            InLoop = true;
             throw new InfiniteLoopException();
         }
         Path.Add(p);
@@ -43,8 +45,7 @@ public class Guard
 
     private bool HasBeenHereBefore(Position position)
     {
-        var matchingPosition = Path.FirstOrDefault(p => p.Equals(position));
-        return matchingPosition != null;
+        return !Path.Add(position);
     }
 
     public void TurnRight()
@@ -73,5 +74,10 @@ public class Guard
     public void MoveForward()
     {
         Move(Direction.X, Direction.Y);
+    }
+
+    internal Guard Clone()
+    {
+        return new Guard(Location.Clone(), Direction.Clone());
     }
 }

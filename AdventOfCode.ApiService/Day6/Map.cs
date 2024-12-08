@@ -14,6 +14,18 @@ public class Map(int width, int height, int[][] obstacles, Point2d intialPositio
         return point.X < 0 || point.X >= Width || point.Y < 0 || point.Y >= Height;
     }
 
+    public Map Clone()
+    {
+        var clonedObstacles = new int[Height][];
+        for (var i = 0; i < Height; i++)
+        {
+            clonedObstacles[i] = new int[Width];
+            Array.Copy(Obstacles[i], clonedObstacles[i], Width);
+        }
+
+        return new Map(Width, Height, clonedObstacles, IntialPosition.Clone());
+    }
+
     public bool MoveGuardForward(Guard guard)
     {
         var nextPosition = guard.GetLocationAhead();

@@ -8,7 +8,7 @@ public class MapParserTests
     [Fact]
     public void ParseMap()
     {
-        var input = 
+        var input =
 """
 ..........
 .#..^.....
@@ -24,5 +24,29 @@ public class MapParserTests
         var map = MapParser.Parse(input);
 
         Assert.Equal(expected, map.Obstacles);
+    }
+
+    [Fact]
+    public void ParseMap_LocateGuard()
+    {
+        var input =
+"""
+....#.....
+.........#
+..........
+..#.......
+.......#..
+..........
+.#..^.....
+........#.
+#.........
+......#...
+""";
+
+        var expected = new Point2d(4, 6);
+
+        var map = MapParser.Parse(input);
+        
+        Assert.Equal(expected, map.IntialPosition);
     }
 }

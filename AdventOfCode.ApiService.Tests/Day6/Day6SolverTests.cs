@@ -68,15 +68,15 @@ public class Day6SolverTests
 #.........
 ......#...
 """;
-        var safeCount = new Day6Solver().CalculatePartTwo(input);
-        Assert.Equal(6, safeCount);
+        var loopCount = new Day6Solver().CalculatePartTwo(input);
+        Assert.Equal(6, loopCount);
     }
 
     [Fact]
     public void PartTwo()
     {
         var input = File.ReadAllText("Day6/input.txt");
-        var safeCount = new Day6Solver().CalculatePartTwo(input);
-        Assert.Equal(4030, safeCount);
+        var loopCount = new Day6Solver().CalculatePartTwo(input);
+        Assert.Equal(1748, loopCount);
     }
 }

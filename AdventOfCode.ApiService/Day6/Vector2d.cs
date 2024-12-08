@@ -21,4 +21,14 @@ public class Vector2d(int x, int y)
 
         return X == other.X && Y == other.Y;
     }
+
+    internal Vector2d Clone()
+    {
+        return new Vector2d(X, Y);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(X, Y);
+    }
 }

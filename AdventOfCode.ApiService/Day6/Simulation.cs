@@ -1,9 +1,15 @@
-using System;
-
 namespace AdventOfCode.ApiService.Day6;
 
 public class Simulation(Map map, Guard guard)
 {
+    public Map Map => map;
+    public Guard Guard => guard;
+
+    public Simulation Clone()
+    {
+        return new Simulation(map.Clone(), guard.Clone());
+    }
+
     public void Run()
     {
         while (true)

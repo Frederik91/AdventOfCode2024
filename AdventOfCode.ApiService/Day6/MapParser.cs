@@ -12,16 +12,16 @@ public static class MapParser
         var width = lines[0].Length;
         var obstacles = new int[height][];
         Point2d? initialPosition = null;
-        for (var i = 0; i < lines.Length; i++)
+        for (var row = 0; row < lines.Length; row++)
         {
-            obstacles[i] = new int[width];
-            for (var j = 0; j < width; j++)
+            obstacles[row] = new int[width];
+            for (var col = 0; col < width; col++)
             {
-                var character = lines[i][j];
-                obstacles[i][j] = character == '#' ? 1 : 0;
+                var character = lines[row][col];
+                obstacles[row][col] = character == '#' ? 1 : 0;
                 if (character == '^')
                 {
-                    initialPosition = new Point2d(j, i);
+                    initialPosition = new Point2d(col, row);
                 }
             }
         }
