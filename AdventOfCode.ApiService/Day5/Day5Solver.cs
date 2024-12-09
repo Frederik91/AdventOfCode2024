@@ -2,7 +2,7 @@ namespace AdventOfCode.ApiService.Day5;
 
 public class Day5Solver : IDaySolver
 {
-    public int CalculatePartOne(string input)
+    public long CalculatePartOne(string input)
     {
         var parsed = Parser.Parse(input);
         var sorter = new PageSorter(parsed.Rules);
@@ -23,7 +23,7 @@ public class Day5Solver : IDaySolver
         return result;
     }
 
-    public int CalculatePartTwo(string input)
+    public long CalculatePartTwo(string input)
     {
         var parsed = Parser.Parse(input);
         var sorter = new PageSorter(parsed.Rules);

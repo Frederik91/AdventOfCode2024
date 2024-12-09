@@ -4,6 +4,6 @@ namespace AdventOfCode.ApiService;
 
 public interface IDaySolver
 {
-    int CalculatePartOne(string input);
-    int CalculatePartTwo(string input);
+    long CalculatePartOne(string input);
+    long CalculatePartTwo(string input);
 }

@@ -2,7 +2,7 @@ namespace AdventOfCode.ApiService.Day1;
 
 public class Day1Solver : IDaySolver
 {
-    public int CalculatePartOne(string input)
+    public long CalculatePartOne(string input)
     {
         var row1Numbers = new List<int>();
         var row2Numbers = new List<int>();
@@ -41,7 +41,7 @@ public class Day1Solver : IDaySolver
         numbers.Add(number);
     }
 
-    public int CalculatePartTwo(string input)
+    public long CalculatePartTwo(string input)
     {
         var row1Numbers = new List<int>();
         var row2Numbers = new Dictionary<int, int>();

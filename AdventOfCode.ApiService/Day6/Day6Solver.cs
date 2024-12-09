@@ -4,7 +4,7 @@ namespace AdventOfCode.ApiService.Day6;
 
 public class Day6Solver : IDaySolver
 {
-    public int CalculatePartOne(string input)
+    public long CalculatePartOne(string input)
     {
         var map = MapParser.Parse(input);
         var guard = new Guard(map.IntialPosition, Vector2d.Up);
@@ -18,7 +18,7 @@ public class Day6Solver : IDaySolver
         return distinctLocations;
     }
 
-    public int CalculatePartTwo(string input)
+    public long CalculatePartTwo(string input)
     {
         var map = MapParser.Parse(input);
 
