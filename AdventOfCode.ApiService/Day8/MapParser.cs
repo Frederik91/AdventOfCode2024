@@ -21,7 +21,7 @@ public static class MapParser
                 }
 
 
-                var antenna = ParseAntenna(x, y, character);
+                var antenna = new Antenna(new (x, y), character);
                 antennas.Add(antenna);
             }
         }
@@ -30,25 +30,5 @@ public static class MapParser
         var height = lines.Length;
 
         return new Map(antennas, width, height);
-    }
-
-    private static Antenna ParseAntenna(int x, int y, char character)
-    {
-        if (char.IsDigit(character))
-        {
-            return new Antenna(new(x, y), AntennaType.Number);
-        }
-
-        if (char.IsUpper(character))
-        {
-            return new Antenna(new(x, y), AntennaType.Uppercase);
-        }
-
-        if (char.IsLower(character))
-        {
-            return new Antenna(new(x, y), AntennaType.Lowercase);
-        }
-
-        throw new NotSupportedException($"Character {character} is not supported");
     }
 }

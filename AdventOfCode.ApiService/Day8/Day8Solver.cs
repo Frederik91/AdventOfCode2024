@@ -17,6 +17,12 @@ public class Day8Solver : IDaySolver
 
     public long CalculatePartTwo(string input)
     {
-        throw new NotImplementedException();
+        var map = MapParser.Parse(input);
+
+        var lines = map.GetLines();
+
+        var resonancePoints = new ResonanceFinder(map).GetResonanceLines(lines);
+
+        return resonancePoints.Count;
     }
 }

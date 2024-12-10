@@ -4,7 +4,7 @@ namespace AdventOfCode.ApiService.Day8;
 
 public class Map(List<Antenna> antennas, int width, int height)
 {
-    public Dictionary<AntennaType, Dictionary<Point2d, Antenna>> Antennas { get; } = antennas
+    public Dictionary<char, Dictionary<Point2d, Antenna>> Antennas { get; } = antennas
         .GroupBy(x => x.Type)
         .ToDictionary(g => g.Key, g => g.ToDictionary(a => a.Location));
 

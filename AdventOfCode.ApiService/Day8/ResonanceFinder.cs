@@ -4,11 +4,78 @@ namespace AdventOfCode.ApiService.Day8;
 
 public class ResonanceFinder(Map map)
 {
+    public List<Point2d> GetResonanceLines(AntennaLines lines)
+    {
+        var resonancePoints = new HashSet<Point2d>();
+
+        foreach (var line in lines)
+        {
+            var resonancePointsInLine = GetAllPointsInLine(line);
+            foreach (var point in resonancePointsInLine)
+            {
+                resonancePoints.Add(point);
+            }
+        }
+
+        return [.. resonancePoints];
+    }
+
+    private IEnumerable<Point2d> GetAllPointsInLine(AntennaLine line)
+    {
+        var dx = line.End.X - line.Start.X;
+        var dy = line.End.Y - line.Start.Y;
+
+        // Reduce dx and dy to the smallest possible values
+        var gcd = Gcd(dx, dy);
+        dx /= gcd;
+        dy /= gcd;
+
+        var result = new List<Point2d>();
+
+        var currentX = line.Start.X;
+        var currentY = line.Start.Y;
+
+        while (IsValidX(currentX) && IsValidY(currentY))
+        {
+            currentX += dx;
+            currentY += dy;
+
+            var point = new Point2d(currentX, currentY);
+            result.Add(point);
+            yield return point;
+        }
+
+        currentX = line.Start.X - dx;
+        currentY = line.Start.Y - dy;
+
+        while (IsValidX(currentX) && IsValidY(currentY))
+        {
+            currentX -= dx;
+            currentY -= dy;
+
+            var point = new Point2d(currentX, currentY);
+            result.Add(point);
+            yield return point;
+        }
+    }
+
+    private static int Gcd(int dx, int dy)
+    {
+        while (dy != 0)
+        {
+            var temp = dy;
+            dy = dx % dy;
+            dx = temp;
+        }
+
+        return dx;
+    }
+
     public List<Point2d> GetResonancePoints(AntennaLines lines)
     {
         var resonancePoints = new HashSet<Point2d>();
 
-        foreach (var line in lines.GetLines())
+        foreach (var line in lines)
         {
             var resonancePointsInLine = GetResonancePointsInLine(line);
             foreach (var point in resonancePointsInLine)
@@ -20,136 +87,41 @@ public class ResonanceFinder(Map map)
         return [.. resonancePoints];
     }
 
-    private List<Point2d> GetResonancePointsInLine(AntennaLine line)
+    public List<Point2d> GetResonancePointsInLine(AntennaLine line)
     {
-        if (line.Start.X == line.End.X)
-        {
-            return GetResonancePointsInVerticalLine(line);
-        }
+        var ditanceX = line.End.X - line.Start.X;
+        var distanceY = line.End.Y - line.Start.Y;
 
-        if (line.Start.Y == line.End.Y)
-        {
-            return GetResonancePointsInHorizontalLine(line);
-        }
+        var minX = line.Start.X - ditanceX;
+        var minY = line.Start.Y - distanceY;
 
-        if (line.Start.X < line.End.X)
-        {
-            return GetResonancePointsInDiagonalLineTopLeftToBottomRight(line);
-        }
-
-        return GetResonancePointsInDiagonalLineBottomLeftToTopRight(line);
-    }
-
-    public List<Point2d> GetResonancePointsInVerticalLine(AntennaLine line)
-    {
-        var start = Math.Min(line.Start.Y, line.End.Y);
-        var end = Math.Max(line.Start.Y, line.End.Y);
-        var distance = end - start;
+        var maxX = line.End.X + ditanceX;
+        var maxY = line.End.Y + distanceY;
 
         var result = new List<Point2d>(2);
 
-        var topResonance = end - (distance * 2);
-        if (topResonance >= 0)
+        if (IsValidX(minX) && IsValidY(minY))
         {
-            var topPoint = new Point2d(line.Start.X, topResonance);
-            result.Add(topPoint);
+            var point = new Point2d(minX, minY);
+            result.Add(point);
         }
-        var bottomResonance = start + (distance * 2);
-        if (bottomResonance < map.Height)
+
+        if (IsValidX(maxX) && IsValidY(maxY))
         {
-            var bottomPoint = new Point2d(line.Start.X, bottomResonance);
-            result.Add(bottomPoint);
+            var point = new Point2d(maxX, maxY);
+            result.Add(point);
         }
 
         return result;
     }
 
-    public List<Point2d> GetResonancePointsInHorizontalLine(AntennaLine line)
+    private bool IsValidX(int x)
     {
-        var start = Math.Min(line.Start.X, line.End.X);
-        var end = Math.Max(line.Start.X, line.End.X);
-        var distance = end - start;
-
-        var result = new List<Point2d>(2);
-
-        var leftResonance = end - (distance * 2);
-        if (leftResonance >= 0)
-        {
-            var leftPoint = new Point2d(leftResonance, line.Start.Y);
-            result.Add(leftPoint);
-        }
-        var rightResonance = start + (distance * 2);
-        if (rightResonance < map.Width)
-        {
-            var rightPoint = new Point2d(rightResonance, line.Start.Y);
-            result.Add(rightPoint);
-        }
-
-        return result;
+        return x >= 0 && x < map.Width;
     }
 
-    public List<Point2d> GetResonancePointsInDiagonalLineTopLeftToBottomRight(AntennaLine line)
+    private bool IsValidY(int minY)
     {
-        var xDistance = line.End.X - line.Start.X;
-        var minX = line.Start.X;
-
-        var minResonanceX = minX - xDistance;
-
-        var yDistance = line.End.Y - line.Start.Y;
-        var minY = line.Start.Y;
-
-        var minResonanceY = minY - yDistance;
-
-        var result = new List<Point2d>(2);
-
-        if (minResonanceX >= 0 && minResonanceY >= 0)
-        {
-            var point = new Point2d(minResonanceX, minResonanceY);
-            result.Add(point);
-        }
-
-        var maxResonanceX = minX + (xDistance * 2);
-        var maxResonanceY = minY + (yDistance * 2);
-
-        if (maxResonanceX < map.Width && maxResonanceY < map.Height)
-        {
-            var point = new Point2d(maxResonanceX, maxResonanceY);
-            result.Add(point);
-        }
-
-        return result;
-
-    }
-
-    public List<Point2d> GetResonancePointsInDiagonalLineBottomLeftToTopRight(AntennaLine line)
-    {
-        var xDistance = line.Start.X - line.End.X;
-        var minX = line.End.X;
-
-        var minResonanceX = minX - xDistance ;
-
-        var yDistance = line.End.Y - line.Start.Y;
-        var minY = line.Start.Y;
-
-        var minResonanceY = minY - yDistance;
-
-        var result = new List<Point2d>(2);
-
-        if (minResonanceX >= 0 && minResonanceY >= 0)
-        {
-            var point = new Point2d(minResonanceX, minResonanceY);
-            result.Add(point);
-        }
-
-        var maxResonanceX = minX + (xDistance * 2);
-        var maxResonanceY = minY + (yDistance * 2);
-
-        if (maxResonanceX < map.Width && maxResonanceY < map.Height)
-        {
-            var point = new Point2d(maxResonanceX, maxResonanceY);
-            result.Add(point);
-        }
-
-        return result;
+        return minY >= 0 && minY < map.Height;
     }
 }

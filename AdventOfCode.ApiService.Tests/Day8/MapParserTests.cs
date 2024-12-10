@@ -23,9 +23,10 @@ public class MapParserTests
 """;
         var map = MapParser.Parse(input);
 
-        Assert.Equal(3, map.Antennas.Count);
+        var antannasOfType = Assert.Single(map.Antennas);
+        Assert.Equal(3, antannasOfType.Value.Count);
 
-        var antenna = map.Antennas[0].Values.First();
+        var antenna = map.Antennas[antannasOfType.Key].Values.First();
         Assert.Equal(4, antenna.Location.X);
         Assert.Equal(3, antenna.Location.Y);
         Assert.Equal(10, map.Height);
